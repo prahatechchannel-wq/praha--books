@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Praha Books | Online Book Store</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#faf8f3;color:#29251f}
+header{background:#30251e;color:white;padding:22px 7%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px}
+.logo{font-size:27px;font-weight:bold;letter-spacing:2px}
+header span{color:#e8bd83}
+nav{background:#49382c;padding:13px 7%;display:flex;gap:25px;flex-wrap:wrap}
+nav a{color:white;text-decoration:none}
+.hero{padding:65px 8%;background:#e9ddcb;text-align:center}
+.hero h1{font-size:42px;margin:0 0 12px}
+.hero p{font-size:17px}
+.search{margin:25px auto;max-width:500px;display:flex}
+.search input{width:100%;padding:15px;border:1px solid #ccc;border-radius:8px;font-size:16px}
+section{padding:35px 7%}
+.section-title{text-align:center;font-size:28px}
+.categories{text-align:center;margin:20px}
+.categories button{padding:10px 18px;margin:5px;border:1px solid #a58b70;border-radius:20px;background:white;cursor:pointer}
+.books{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:22px}
+.book{background:white;padding:15px;border-radius:12px;text-align:center;box-shadow:0 3px 12px #00000010}
+.cover{height:190px;background:#eee1ce;display:flex;align-items:center;justify-content:center;font-size:23px;font-weight:bold;color:#59422d;padding:15px}
+.book h3{font-size:16px;min-height:40px}
+.price{font-size:19px;font-weight:bold;color:#81552d}
+.book button{background:#49382c;color:white;padding:11px 15px;border:0;border-radius:7px;cursor:pointer}
+footer{background:#30251e;color:white;text-align:center;padding:30px}
+@media(max-width:600px){.hero h1{font-size:30px}header{padding:18px 5%}nav{padding:13px 5%}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">PRAHA <span>BOOKS</span></div>
+<div>🛒 Cart: <b id="cart">0</b></div>
+</header>
+<nav>
+<a href="#">Home</a>
+<a href="#books">All Books</a>
+<a href="#categories">Categories</a>
+<a href="#contact">Contact</a>
+</nav>
+<div class="hero">
+<h1>புத்தக உலகிற்கு வரவேற்கிறோம்!</h1>
+<p>உங்களுக்குப் பிடித்த புத்தகங்களை ஒரே இடத்தில் வாங்குங்கள்.</p>
+<div class="search">
+<input id="search" type="text" placeholder="புத்தகத்தின் பெயரைத் தேடுங்கள்...">
+</div>
+</div>
+<section id="categories">
+<h2 class="section-title">Book Categories</h2>
+<div class="categories">
+<button onclick="filterBooks('all')">All Books</button>
+<button onclick="filterBooks('வரலாறு')">வரலாறு</button>
+<button onclick="filterBooks('அரசியல்')">அரசியல்</button>
+<button onclick="filterBooks('இலக்கியம்')">இலக்கியம்</button>
+</div>
+</section>
+<section id="books">
+<h2 class="section-title">Our Books</h2>
+<div class="books" id="bookList">
+<div class="book" data-category="அரசியல்">
+<div class="cover">PRAHA<br>BOOKS</div>
+<h3>ஒரு பொருளாதார அடியாளின் ஒப்புதல் வாக்குமூலம்</h3>
+<p class="price">₹400</p>
+<button onclick="addCart()">Add to Cart</button>
+</div>
+<div class="book" data-category="வரலாறு">
+<div class="cover">தமிழர்<br>வரலாறு</div>
+<h3>தமிழர் அடிமையானது ஏன்? எவ்வாறு?</h3>
+<p class="price">₹350</p>
+<button onclick="addCart()">Add to Cart</button>
+</div>
+<div class="book" data-category="இலக்கியம்">
+<div class="cover">தமிழ்<br>இலக்கியம்</div>
+<h3>குமரி</h3>
+<p class="price">₹420</p>
+<button onclick="addCart()">Add to Cart</button>
+</div>
+<div class="book" data-category="வரலாறு">
+<div class="cover">HISTORY</div>
+<h3>பிரிட்டிஷ் உளவாளி</h3>
+<p class="price">₹120</p>
+<button onclick="addCart()">Add to Cart</button>
+</div>
+</div>
+</section>
+<footer id="contact">
+<h2>PRAHA BOOKS</h2>
+<p>உங்கள் வாசிப்புப் பயணத்தின் புதிய தொடக்கம்.</p>
+<p>Contact Us | Online Tamil Book Store</p>
+<p>© 2026 Praha Books. All Rights Reserved.</p>
+</footer>
+<script>
+let cart=0;
+function addCart(){
+cart++;
+document.getElementById('cart').innerText=cart;
+alert('Book added to cart!');
+}
+function filterBooks(category){
+document.querySelectorAll('.book').forEach(book=>{
+book.style.display=(category==='all'||book.dataset.category===category)?'block':'none';
+});
+}
+document.getElementById('search').addEventListener('input',function(){
+let value=this.value.toLowerCase();
+document.querySelectorAll('.book').forEach(book=>{
+book.style.display=book.innerText.toLowerCase().includes(value)?'block':'none';
+});
+});
+</script>
+</body>
+</html>
